@@ -11,6 +11,7 @@ import SwiftData
 struct LearnedTodayView: View {
     @State var name = ""
     @State var note = ""
+    @State var status = ""
     @Environment(\.modelContext) var context
     @Query var entries: [LearnedEntry]
     @State var selectedEntry: LearnedEntry?
@@ -25,15 +26,22 @@ struct LearnedTodayView: View {
                 .border(Color.gray.opacity(0.5), width: 1)
                 .padding(.horizontal)
             
+            TextEditor(text: $status)
+                .frame(height: 150)
+                .border(Color.gray.opacity(0.5), width: 1)
+                .padding(.horizontal)
+            
             Button("Save Entry") {
                 let trimmedName = name.trimmingCharacters(in: .whitespaces)
                 let trimmedNote = note.trimmingCharacters(in: .whitespaces)
+                let trimmedStatus = status.trimmingCharacters(in:.whitespaces)
                 guard !trimmedName.isEmpty && !trimmedNote.isEmpty else { return }
                 
-                let entry = LearnedEntry(name: trimmedName, note: trimmedNote)
+                let entry = LearnedEntry(name: trimmedName, note: trimmedNote, status: trimmedStatus)
                 context.insert(entry)
                 name = ""
                 note = ""
+                status = ""
             }
             
             List {

@@ -13,11 +13,13 @@ import SwiftData
 class LearnedEntry {
     var name: String
     var note: String
+    var status: String
     var explanation: String
     
-    init(name: String, note: String, explanation: String) {
+    init(name: String, note: String, status: String, explanation: String) {
         self.name = name
         self.note = note
         self.explanation = explanation
+        self.status = status
     }
 }
